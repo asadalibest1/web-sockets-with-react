@@ -29,7 +29,13 @@ function originIsAllowed(origin) {
 var clients = {};
 
 wsServer.on('request', function (request) {
-  var userID = getUniqueID();
+
+
+  var params = request.resourceURL.pathname.replace("/live-editor/", "");
+
+  const userID = getUniqueID();
+
+
 
   if (!originIsAllowed(request.origin)) {
     // Make sure we only accept requests from an allowed origin
@@ -39,14 +45,21 @@ wsServer.on('request', function (request) {
   }
 
   var connection = request.accept('echo-protocol', request.origin);
+
+  // const client = {};
+  // client[userID] = connection;
+
+  // clients[sessionId] = client;
   clients[userID] = connection;
+
+  console.log(Object.keys(clients).length);
 
   console.log('connected: ' + userID + ' in ' + Object.getOwnPropertyNames(clients));
   connection.on('message', function (message) {
     if (message.type === 'utf8') {
 
       for (key in clients) {
-        if (clients[key] != clients[userID]) {
+        if (clients[key] !== clients[userID]) {
           clients[key].sendUTF(message.utf8Data);
           console.log('sent Message to: ', clients[key]);
         }

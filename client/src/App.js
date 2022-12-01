@@ -2,8 +2,19 @@ import React, { useEffect, useRef, useState } from 'react'
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 import "./App.css"
 
-var client = new W3CWebSocket('ws://localhost:8000/', 'echo-protocol');
+const getUniqueID = () => {
+    const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+    return s4() + s4() + '-' + s4();
+};
+
+const pathname = getUniqueID() + "/" + getUniqueID();
+
+var client = new W3CWebSocket('ws://localhost:8000/' + pathname, 'echo-protocol');
+
+window.history.pushState({}, null, pathname);
+
 const App = () => {
+
 
     const [getData, setgetData] = useState('')
     const [Error, setError] = useState("");
@@ -57,7 +68,6 @@ const App = () => {
             {Error && <div className='alert'>{Error}</div>}
             {/* <h2>Connections:</h2>
             <ul>
-
             </ul> */}
         </>)
 }
