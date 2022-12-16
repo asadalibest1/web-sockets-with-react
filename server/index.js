@@ -8,7 +8,7 @@ var server = http.createServer(function (request, response) {
   response.end();
 });
 server.listen(8000, function () {
-  console.log((new Date()) + ' Server is listening on port 8080');
+  console.log((new Date()) + ' Server is listening on port 8000');
 });
 
 wsServer = new WebSocketServer({
@@ -31,11 +31,12 @@ var clients = {};
 wsServer.on('request', function (request) {
 
 
-  var params = request.resourceURL.pathname.replace("/live-editor/", "");
+  var params = request.resourceURL.pathname;
 
+  const sessionId = getUniqueID();
   const userID = getUniqueID();
 
-
+  console.log("params", request.resourceURL);
 
   if (!originIsAllowed(request.origin)) {
     // Make sure we only accept requests from an allowed origin
@@ -46,27 +47,28 @@ wsServer.on('request', function (request) {
 
   var connection = request.accept('echo-protocol', request.origin);
 
-  // const client = {};
-  // client[userID] = connection;
+  const client = {};
+  client[userID] = connection;
 
-  // clients[sessionId] = client;
-  clients[userID] = connection;
+  clients[sessionId] = client;
+  // clients[userID] = connection;
 
-  console.log(Object.keys(clients).length);
+  // console.log(Object.keys(clients).length);
 
   console.log('connected: ' + userID + ' in ' + Object.getOwnPropertyNames(clients));
   connection.on('message', function (message) {
     if (message.type === 'utf8') {
 
-      for (key in clients) {
-        if (clients[key] !== clients[userID]) {
-          clients[key].sendUTF(message.utf8Data);
-          console.log('sent Message to: ', clients[key]);
+      for (key in clients[sessionId]) {
+        if (clients[sessionId][key] !== clients[sessionId][userID]) {
+          clients[sessionId][key].sendUTF(message.utf8Data);
+          console.log('sent Message to: ', clients[sessionId][key]);
         }
       }
     }
     else if (message.type === 'binary') {
       for (key in clients) {
+
         console.log('Received Binary Message of ' + message.binaryData.length + ' bytes');
         connection.sendBytes(message.binaryData);
       }

@@ -10,12 +10,13 @@ const getUniqueID = () => {
 const Home = () => {
 
   const navigate = useNavigate();
-  useEffect(() => {
+
+  const nav = () => {
     navigate("/live-editor/" + getUniqueID() + "/" + getUniqueID())
-  }, [])
+  }
 
   return (
-    <div />
+    <div><button onClick={nav}>click</button></div>
   )
 }
 

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { w3cwebsocket as W3CWebSocket } from "websocket";
+import { ethers } from 'ethers';
 import "./App.css"
 
 const getUniqueID = () => {
@@ -7,14 +8,44 @@ const getUniqueID = () => {
     return s4() + s4() + '-' + s4();
 };
 
-const pathname = getUniqueID() + "/" + getUniqueID();
 
-var client = new W3CWebSocket('ws://localhost:8000/' + pathname, 'echo-protocol');
+// if (window.ethereum) {
+//     window.ethereum.request({ method: 'eth_requestAccounts' })
+//         .then(res => {
+//             accountChangedHandler(res[0]);
+//         })
+// } else {
+//     alert("install metamask extension!!")
+// }
 
-window.history.pushState({}, null, pathname);
 
-const App = () => {
+// const accountChangedHandler = (newAccount) => {
+//     getUserBalance(newAccount.toString());
+// }
 
+// const getUserBalance = (account) => {
+
+//     window.ethereum.request({ method: 'eth_getBalance', params: [account, 'latest'] })
+//         .then(balance => alert('address: ' + account + '\nBalance: ' + ethers.utils.formatEther(balance)))
+
+//     console.log(account);
+// }
+
+// window.ethereum.on('accountsChanged', accountChangedHandler);
+// window.ethereum.on('chainChanged', () => window.location.reload());
+
+const App = ({ pathname }) => {
+
+
+    // if (pathname === "/") {
+    //     pathname = getUniqueID() + "/" + getUniqueID();
+    //     window.history.pushState({}, null, pathname);
+    // } else {
+    //     pathname = pathname.replace("/", "");
+    // }
+
+
+    const client = new W3CWebSocket('ws://localhost:8000/' + pathname, 'echo-protocol')
 
     const [getData, setgetData] = useState('')
     const [Error, setError] = useState("");

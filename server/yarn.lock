@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+FileReader@^0.10.2:
+  version "0.10.2"
+  resolved "https://registry.yarnpkg.com/FileReader/-/FileReader-0.10.2.tgz#1b117bdb6b5ed85e241ac3cb10f1b7086524e539"
+  integrity sha512-O0K+5KRnDBFNogBPtV5hWjyJSQOoB2j3ZLbre1pBjCdE9CNpeIUPI8IX3G7eafIZ/HsllbGaIucEbt2qL+EX0g==
+
 abbrev@1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
@@ -729,10 +734,10 @@ websocket@^1.0.34:
     utf-8-validate "^5.0.2"
     yaeti "^0.0.6"
 
-ws@^8.11.0:
-  version "8.11.0"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-8.11.0.tgz#6a0d36b8edfd9f96d8b25683db2f8d7de6e8e143"
-  integrity sha512-HPG3wQd9sNQoT9xHyNCXoDUa+Xw/VevmY9FoHyQ+g+rrMn4j6FB4np7Z0OhdTgjx6MgQLK7jwSy1YecU1+4Asg==
+ws@7.5.0:
+  version "7.5.0"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-7.5.0.tgz#0033bafea031fb9df041b2026fc72a571ca44691"
+  integrity sha512-6ezXvzOZupqKj4jUqbQ9tXuJNo+BR2gU8fFRk3XCP3e0G6WT414u5ELe6Y0vtp7kmSJ3F7YWObSNr1ESsgi4vw==
 
 yaeti@^0.0.6:
   version "0.0.6"

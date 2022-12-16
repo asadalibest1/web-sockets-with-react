@@ -1,6 +1,8 @@
 import React from 'react';
-import Home from './Home';
-import LiveEditor from './App';
+// import Home from './Home';
+import App from './ws';
+// import LiveEditor from './App';
+// import LiveEditor from './App1';
 // import reportWebVitals from './reportWebVitals';
 
 
@@ -15,17 +17,20 @@ import {
   useNavigate
 } from "react-router-dom";
 
+let pathname = window.location.pathname;
+
 render(
-  // <Router>
-  //   <Routes>
-  //     <Route path="/" element={
-  //       <Home />
-  //     } />
-  //     <Route path="/live-editor/:sessionId/:userId" element={
-  <LiveEditor />
+  //   <Router>
+  //     <Routes>
+  //       <Route path="/" element={
+  //         <Home />} />
+  //       <Route path="/live-editor/:sessionId/:userId" element={
+  //         <LiveEditor />
   // } />
-  //   </Routes>
-  // </Router >
+  //     </Routes>
+  //   </Router >
+  // <LiveEditor pathname={pathname} />
+  <App />
   ,
   document.getElementById("root")
 );
